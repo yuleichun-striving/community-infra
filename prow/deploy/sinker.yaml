@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: kosmos-prow
+  name: sinker
+  labels:
+    app: sinker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sinker
+  template:
+    metadata:
+      labels:
+        app: sinker
+    spec:
+      nodeSelector:
+        node: node1
+      containers:
+        - args:
+            - --config-path=/etc/config/config.yaml
+            - --dry-run=false
+          image: cnp-2db5848a.ecis.huabei-3.cmecloud.cn/cnp/k8s-prow/sinker:v20201026-f7d653694b
+          imagePullPolicy: IfNotPresent
+          name: sinker
+          volumeMounts:
+            - mountPath: /etc/config
+              name: config
+              readOnly: true
+      volumes:
+        - configMap:
+            name: config
+          name: config
