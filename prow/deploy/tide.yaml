@@ -24,8 +24,13 @@ spec:
             - --github-token-path=/etc/github/oauth
             - --github-endpoint=https://api.github.com
             - --config-path=/etc/config/config.yaml
-          image: cnp-2db5848a.ecis.huabei-3.cmecloud.cn/cnp/k8s-prow/tide:v20201026-f7d653694b
+          image: $(IMAGE_REPOSITORY)/k8s-prow/tide:$(IMAGE_VERSION)
           imagePullPolicy: IfNotPresent
+          env:
+            - name: IMAGE_REPOSITORY
+              value: "cnp-2db5848a.ecis.huabei-3.cmecloud.cn/cnp"
+            - name: IMAGE_VERSION
+              value: "v20201026-f7d653694b"
           name: tide
           ports:
             - name: http

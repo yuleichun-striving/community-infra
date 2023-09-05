@@ -24,12 +24,17 @@ spec:
             - --config-path=/etc/config/config.yaml
             - --github-endpoint=https://api.github.com
             - --github-token-path=/etc/github/oauth
-          image: cnp-2db5848a.ecis.huabei-3.cmecloud.cn/cnp/k8s-prow/hook:v20201026-f7d653694b
+          image: $(IMAGE_REPOSITORY)/k8s-prow/hook:$(IMAGE_VERSION)
           imagePullPolicy: IfNotPresent
           name: hook
           ports:
             - name: http
               containerPort: 8888
+          env:
+            - name: IMAGE_REPOSITORY
+              value: "cnp-2db5848a.ecis.huabei-3.cmecloud.cn/cnp"
+            - name: IMAGE_VERSION
+              value: "v20201026-f7d653694b"
           volumeMounts:
             - mountPath: /etc/webhook
               name: hmac

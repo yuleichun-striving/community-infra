@@ -22,8 +22,13 @@ spec:
             - --config-path=/etc/config/config.yaml
             - --deck-url=http:deck:888
             - --dry-run=false
-          image: cnp-2db5848a.ecis.huabei-3.cmecloud.cn/cnp/k8s-prow/horologium:v20201026-f7d653694b
+          image: $(IMAGE_REPOSITORY)/k8s-prow/horologium:$(IMAGE_VERSION)
           imagePullPolicy: IfNotPresent
+          env:
+            - name: IMAGE_REPOSITORY
+              value: "cnp-2db5848a.ecis.huabei-3.cmecloud.cn/cnp"
+            - name: IMAGE_VERSION
+              value: "v20201026-f7d653694b"
           name: horologium
           volumeMounts:
             - mountPath: /etc/config
