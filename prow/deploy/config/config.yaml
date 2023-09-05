@@ -11,7 +11,7 @@ data:
 
     tide:
       sync_period: 1m
-      target_url: http://36.137.201.34:31188/tide
+      target_url: http://$(PUBLIC_IP):$(NODE_PORT)/tide
 
       queries:
         - orgs:
